@@ -12,26 +12,35 @@ Use code with caution.
 
 ## Usage
 
-Replace the placeholder values for api_key, api_key_secret, access_token, and access_token_secret with your actual Twitter API credentials obtained from https://developer.x.com/en.
+Replace the placeholder values for ```api_key```, ```api_key_secret```, ```access_token```, and ```access_token_secret``` with your actual Twitter API credentials obtained from https://developer.x.com/en.
 Modify the query variable to specify the hashtag or keyword you want to analyze.
-Run the script: python twitter_trending_analysis.py
+Run the script:
+```
+python twitter_trending_analysis.py
+```
 ## Functionality
 
-Authentication: Uses tweepy.OAuth1UserHandler to securely authenticate with the Twitter API.
-Error Handling: Incorporates try-except blocks to gracefully handle potential Tweepy exceptions like rate limits or search errors.
-Tweet Search: Leverages tweepy.Client.search_recent_tweets to fetch recent tweets containing the specified query.
+Authentication: Uses ```tweepy.OAuth1UserHandler``` to securely authenticate with the Twitter API.
+
+Error Handling: Incorporates ```try-except``` blocks to gracefully handle potential Tweepy exceptions like rate limits or search errors.
+
+Tweet Search: Leverages ```tweepy.Client.search_recent_tweets``` to fetch recent tweets containing the specified query.
+
 Tweet Filtering: Returns an empty list if no tweets are found to avoid potential errors in subsequent processing.
-Content Extraction: Uses regular expressions to identify relevant hashtags, keywords, and entities within tweets, potentially including the provided name_regex patterns. Customize this regex for your specific needs.
-Frequency Analysis: Counts the occurrences of each extracted term using collections.Counter.
+
+Content Extraction: Uses regular expressions to identify relevant hashtags, keywords, and entities within tweets, potentially including the provided ```name_regex``` patterns. Customize this regex for your specific needs.
+
+Frequency Analysis: Counts the occurrences of each extracted term using ```collections.Counter```.
 Output: Prints the top 10 most frequently mentioned terms.
 ## Example Output
-
+```
 #RejectFinanceBill2024: 500
 #GenZ: 321
 #RutoMustGo: 287
 #Asalimiwe: 198
 Resign: 172
 ... (other top 10 terms)
+```
 ## Dependencies
 
 tweepy (version upgrade recommended)
