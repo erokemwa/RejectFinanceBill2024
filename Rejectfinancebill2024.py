@@ -1,5 +1,3 @@
-!pip install --upgrade tweepy # upgrade to the latest version
-
 import tweepy
 import re
 from collections import Counter
