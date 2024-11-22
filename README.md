@@ -5,7 +5,9 @@ This Repository contatin a Python script that analyzes trending topics on Twitte
 ## Installation
 
 Bash
+```
 pip install --upgrade tweepy
+```
 Use code with caution.
 
 ## Usage
