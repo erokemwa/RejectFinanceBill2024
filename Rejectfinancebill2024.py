@@ -1,3 +1,5 @@
+!pip install --upgrade tweepy # upgrade to the latest version
+
 import tweepy
 import re
 from collections import Counter
@@ -5,9 +7,9 @@ from collections import Counter
 def authenticate_twitter(api_key, api_key_secret, access_token, access_token_secret):
     # Create OAuth1UserHandler instead of OAuthHandler
     # and pass all 4 keys directly to it
-    auth = tweepy.OAuth1UserHandler(api_key, api_key_secret, access_token, access_token_secret) 
+    auth = tweepy.OAuth1UserHandler(api_key, api_key_secret, access_token, access_token_secret)
     # Pass the authentication handler's bearer_token to the Client constructor
-    client = tweepy.Client(bearer_token=auth.access_token, wait_on_rate_limit=True) 
+    client = tweepy.Client(bearer_token=auth.access_token, wait_on_rate_limit=True)
     return client
 
 def search_tweets(client, query, count=100):
@@ -30,15 +32,15 @@ def extract_tweets(tweets):
     # Regex for identifying Activism (e.g., #RejectFinanceBill, #RutoMustGo)
     ticker_regex = r"\$[A-Za-z0-9]+"
     # Regex for general coin mentions
-    name_regex = r"(Reject|Ruto Must Go|Occupy Parliament|Genz|Baddie|Teargas|Asalimiwe|Tuesday|Thursday|Resign|Sanitary Towels)"
-    coins = []
+    name_regex = r"(Reject|RutoMustGo|OccupyParliament|Genz|Baddie|Teargas|Asalimiwe|Tuesday|Thursday|Resign|Sanitary Towels)"
+    chant = []
     for tweet in tweets:
         # Extract tickers
         tickers = re.findall(ticker_regex, tweet)
-        # Extract coin names
+        # Extract chant words
         names = re.findall(name_regex, tweet, re.IGNORECASE)
-        coins.extend(tickers + names)
-    return coins
+        chant.extend(tickers + names)
+    return chant
 
 # Replace with your Twitter API credentials
 api_key = "YOUR_API_KEY"
@@ -53,12 +55,12 @@ client = authenticate_twitter(api_key, api_key_secret, access_token, access_toke
 query = "#RejectFinanceBill2024"
 tweets = search_tweets(client, query) # Pass client to search_tweets
 
-# Extract coin names and symbols
+# Extract chant word
 tweets = extract_tweets(tweets)
 
-# Count the frequency of each coin
+# Count the frequency of each tweet
 tweets_counts = Counter(tweets)
 
-# Print the top 10 most mentioned coins
+# Print the top 10 most mentioned chant
 for tweets, count in tweets_counts.most_common(10):
     print(f"{tweets}: {count}")
